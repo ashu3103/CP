@@ -1,54 +1,57 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-#define ll long long
 
-static bool cmp(vector<int> &a,vector<int> &b)
-{
-    if(a[1] != b[1]){
-       return a[1]<b[1];
+int lowerSearch(vector<int>&A, int t){
+        int s = 0;
+        int e = A.size()-1;
+
+        while(s<e){
+            int mid = (s+e)/2;
+            if(A[mid] == t){
+                e = mid;
+            }else if(A[mid] > t){
+                e = mid-1;
+            }else{
+                s = mid+1;
+            }   
+        }
+
+        if(e>=0 && A[e] == t){
+            return e;
+        }
+
+        return -1;
     }
-    return a[0]>b[0];
+
+int upperSearch(vector<int>&A, int t){
+    int s = 0;
+    int e = A.size()-1;
+
+    while(s<=e){
+        int mid = (s+e)/2;
+        if(A[mid] == t){
+            s = mid+1;
+        }else if(A[mid] > t){
+            e = mid-1;
+        }else{
+            s = mid+1;
+        }   
+    }
+
+    if(e>=0 && A[e] == t){
+        return e;
+    }
+
+    return -1;
 }
 
-int setIntersection(vector<vector<int> > &A) 
-{  
-    sort(A.begin(),A.end(),cmp);
-    for(int i=0;i<A.size();i++){
-        cout << A[i][0] << " " << A[i][1] << endl;
-    }
-   int cnt = 2; 
-   int n = A.size();
-   pair<int,int> p;
-   p.first = A[0][1]-1; p.second = A[0][1];
-   for(int i = 1; i<n; i++){
-      if(p.second < A[i][0]){
-          cnt = cnt+2;
-          p.second = A[i][1];
-          p.first = p.second - 1;
-      }
-      else if(p.second == A[i][0]){
-          cnt++;
-          p.first = p.second;
-          p.second = A[i][1];
-      }
-      else if(p.first < A[i][0]){
-          cnt++;
-         if(p.second == A[i][1]){
-            p.first = p.second - 1;
-         }
-         else{
-            p.first = p.second;
-            p.second = A[i][1];
-         }
-      }
-   }
-   return cnt;
-}
+int main(){
 
-
-int main(int argc, char *argv[]){
-    vector<vector<int>> A = {{1,3}, {1,4}, {2,5}, {3,5}};
-    int ans = setIntersection(A);
-
+    vector<int> A = {1};
+    // cout << search(A) << endl;
+    int n;
+    cin>>n;
+    cout << lowerSearch(A, n) << endl; 
+    cout << upperSearch(A, n) << endl;
     return 0;
 }
