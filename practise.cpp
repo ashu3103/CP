@@ -1,57 +1,31 @@
 #include<bits/stdc++.h>
 using namespace std;
-
-int lowerSearch(vector<int>&A, int t){
-        int s = 0;
-        int e = A.size()-1;
-
-        while(s<e){
-            int mid = (s+e)/2;
-            if(A[mid] == t){
-                e = mid;
-            }else if(A[mid] > t){
-                e = mid-1;
-            }else{
-                s = mid+1;
-            }   
-        }
-
-        if(e>=0 && A[e] == t){
-            return e;
-        }
-
-        return -1;
-    }
-
-int upperSearch(vector<int>&A, int t){
-    int s = 0;
-    int e = A.size()-1;
-
-    while(s<=e){
-        int mid = (s+e)/2;
-        if(A[mid] == t){
-            s = mid+1;
-        }else if(A[mid] > t){
-            e = mid-1;
-        }else{
-            s = mid+1;
-        }   
-    }
-
-    if(e>=0 && A[e] == t){
-        return e;
-    }
-
-    return -1;
-}
+#define ll long long
 
 int main(){
 
-    vector<int> A = {1};
-    // cout << search(A) << endl;
-    int n;
-    cin>>n;
-    cout << lowerSearch(A, n) << endl; 
-    cout << upperSearch(A, n) << endl;
+    vector<int> A = {1,1,1,1,1,2,2,2,2,2,2,5,5,6,6,6,6,6,6,7,7,8,8,8,9,9,9,10,10,10};
+    int B = 4;
+
+    int n = A.size();
+    vector<int> ans = {-1,-1};
+
+    auto ind1 = lower_bound(A.begin(), A.end(), B);
+    cout << ind1 - A.begin() << endl;
+    if(*ind1 == B){
+        ans[0] = ind1 - A.begin();
+    }
+    
+    auto ind2 = upper_bound(A.begin(), A.end(), B);
+    cout << ind2 - A.begin() << endl;
+    if(ind2 != A.begin()){
+        ind2--;
+        if(*ind2 == B){
+            ans[1] = ind2 - A.begin();
+        }
+    }
+    
+    cout << ans[0] << " " << ans[1] << endl;
+
     return 0;
 }
