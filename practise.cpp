@@ -3,6 +3,7 @@ using namespace std;
 #define ll long long
 
 int main(){
+    
     vector<int> A = {1,1,1,1,1,2,2,2,2,2,2,5,5,6,6,6,6,6,6,7,7,8,8,8,9,9,9,10,10,10};
     int B = 4;
 
