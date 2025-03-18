@@ -155,7 +155,6 @@ void approach_2 ()
     pi(sz(frequency_table));
 }
 
-
 int main(int argc, char *argv[])
 {
     approach_2();
