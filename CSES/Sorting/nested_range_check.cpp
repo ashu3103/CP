@@ -80,40 +80,9 @@ int mpow(int base, int exp)
 }
 
 /*
-    Question: Given an array of n integers, your task is to find the maximum sum of values in a 
-    contiguous, nonempty subarray.
+    Question: Given n ranges, your task is to determine for each range if it contains some other range 
+    and if some other range contains it.
+    Range [a,b] contains range [c,d] if a \le c and d \le b.
 
-    Approach: 
-    1) Kadane's Algo: keep maintaining a prefix sum from start, if the sum becomes zero at any point, start
-    maintaining prefix sum from next index
-    Time complexity: O(n)
+    Answer: 
 */
-
-// TC: O(n)
-void approach_1 ()
-{
-    int n;
-    cin >> n;
-
-    vi array(n);
-    fo(0, n) {
-        cin >> array[i];
-    }
-
-    ll max_subarray_sum = INT_MIN;
-    ll prefix_sum = 0;
-    fo(0, n) {
-        prefix_sum+=array[i];
-        max_subarray_sum = max(max_subarray_sum, prefix_sum);
-        if (prefix_sum<0) {
-            prefix_sum = 0;
-        }
-    }
-    cout << max_subarray_sum << endl;
-}
-
-int main()
-{
-    approach_1();
-    return 0;
-}
